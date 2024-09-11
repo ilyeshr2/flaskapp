@@ -22,11 +22,6 @@ def init_db():
     conn.commit()
     conn.close()
 
-# Call init_db on each request to ensure the table exists
-@app.before_first_request
-def setup_db():
-    init_db()
-
 # Function to determine the action type based on the URL
 def get_action_from_url(url):
     if 'backend-api' in url:
@@ -97,5 +92,6 @@ def log_activity():
     return jsonify({'status': 'success'}), 200
 
 if __name__ == '__main__':
-    init_db()  # Ensure the database is created
+    init_db()
     app.run(host='0.0.0.0', port=5000)
+
